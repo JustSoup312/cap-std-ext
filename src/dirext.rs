@@ -314,7 +314,7 @@ fn is_mountpoint_impl_statx(root: &Dir, path: &Path) -> Result<Option<bool>> {
     use std::os::fd::AsFd;
 
     // SAFETY(unwrap): We can infallibly convert an i32 into a u64.
-    let mountroot_flag: u64 = libc::STATX_ATTR_MOUNT_ROOT.try_into().unwrap();
+    let mountroot_flag: u64 = rustix::fs::STATX_ATTR_MOUNT_ROOT.try_into().unwrap();
     match rustix::fs::statx(
         root.as_fd(),
         path,
